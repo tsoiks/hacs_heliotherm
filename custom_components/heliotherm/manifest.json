@@ -1,0 +1,11 @@
+{
+  "domain": "heliotherm",
+  "name": "Heliotherm",
+  "codeowners": ["@tsoiks"],
+  "config_flow": true,
+  "documentation": "https://github.com/tsoiks/hacs_heliotherm",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/tsoiks/hacs_heliotherm/issues",
+  "requirements": ["pymodbus>=3.1.1,<4.0"],
+  "version": "0.1.0"
+}
