@@ -1,6 +1,6 @@
 {
   "name": "Heliotherm",
-  "homeassistant": "2022.12.0",
+  "homeassistant": "0.100.0",
   "domains": [
     "sensor",
     "switch",
@@ -9,7 +9,7 @@
   "documentation": "https://github.com/tsoiks/hacs_heliotherm",
   "issue_tracker": "https://github.com/tsoiks/hacs_heliotherm/issues",
   "requirements": [
-    "pymodbus>=3.1.1,<4.0"
+    "pymodbus"
   ],
   "render_readme": true,
   "hacs": {
