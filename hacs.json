@@ -1,6 +1,7 @@
 {
   "name": "Heliotherm",
-  "homeassistant": "0.100.0",
+  "homeassistant": "2022.12.0",
+  "hacs": "0.24.0",
   "domains": [
     "sensor",
     "switch",
