@@ -1,0 +1,180 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    },
+    "error": {
+      "cannot_connect": "Failed to read from the heat pump. Check the address, the port, the Modbus unit ID, and that Modbus TCP is enabled on the heat pump's Remote Control Gateway.",
+      "invalid_host": "Enter a hostname or IP address.",
+      "invalid_port": "Enter a port between 1 and 65535.",
+      "invalid_unit_id": "Enter a Modbus unit ID between 0 and 255."
+    },
+    "step": {
+      "user": {
+        "data": {
+          "host": "[%key:common::config_flow::data::host%]",
+          "port": "[%key:common::config_flow::data::port%]",
+          "unit_id": "Modbus unit ID"
+        },
+        "data_description": {
+          "host": "The hostname or IP address of the heat pump's Remote Control Gateway (RCG).",
+          "port": "The Modbus TCP port of the RCG.",
+          "unit_id": "The heat pump's Modbus unit ID, as shown in the RCG's Modbus settings."
+        },
+        "description": "Connect to a Heliotherm heat pump over Modbus TCP through its Remote Control Gateway."
+      },
+      "init": {
+        "data": {
+          "scan_interval": "Seconds between polls"
+        },
+        "data_description": {
+          "scan_interval": "How often the heat pump is read. The integration reads a handful of registers per poll."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "buffer_charge_pump": {
+        "name": "Buffer charge pump"
+      },
+      "compressor": {
+        "name": "Compressor"
+      },
+      "domestic_hot_water_priority": {
+        "name": "Domestic hot water priority"
+      },
+      "fault": {
+        "name": "Fault"
+      },
+      "four_way_valve": {
+        "name": "Four-way valve"
+      },
+      "heating_circuit_pump": {
+        "name": "Heating circuit pump"
+      },
+      "passive_cooling_valve": {
+        "name": "Passive cooling valve"
+      },
+      "source_pump_or_fan": {
+        "name": "Source pump or fan"
+      }
+    },
+    "sensor": {
+      "buffer_temperature": {
+        "name": "Buffer temperature"
+      },
+      "coefficient_of_performance": {
+        "name": "Coefficient of performance"
+      },
+      "compressor_demand": {
+        "name": "Compressor demand",
+        "state": {
+          "none": "None",
+          "cooling": "Cooling",
+          "heating": "Heating",
+          "domestic_hot_water": "Domestic hot water",
+          "external": "External"
+        }
+      },
+      "compressor_speed_setpoint": {
+        "name": "Compressor speed setpoint"
+      },
+      "condensation_temperature": {
+        "name": "Condensation temperature"
+      },
+      "domestic_hot_water_electric_energy": {
+        "name": "Domestic hot water electric energy"
+      },
+      "domestic_hot_water_heat_energy": {
+        "name": "Domestic hot water heat energy"
+      },
+      "domestic_hot_water_hours": {
+        "name": "Domestic hot water operating hours"
+      },
+      "domestic_hot_water_temperature": {
+        "name": "Domestic hot water temperature"
+      },
+      "electric_power": {
+        "name": "Electric power"
+      },
+      "evaporation_temperature": {
+        "name": "Evaporation temperature"
+      },
+      "expansion_valve": {
+        "name": "Expansion valve"
+      },
+      "flow_rate": {
+        "name": "Flow rate"
+      },
+      "fresh_water_temperature": {
+        "name": "Fresh water temperature"
+      },
+      "heating_electric_energy": {
+        "name": "Heating electric energy"
+      },
+      "heating_heat_energy": {
+        "name": "Heating heat energy"
+      },
+      "heating_hours": {
+        "name": "Heating operating hours"
+      },
+      "heat_power": {
+        "name": "Heat power"
+      },
+      "high_pressure": {
+        "name": "High pressure"
+      },
+      "hot_gas_temperature": {
+        "name": "Hot gas temperature"
+      },
+      "low_pressure": {
+        "name": "Low pressure"
+      },
+      "mkr1_flow_setpoint_temperature": {
+        "name": "MKR1 flow setpoint"
+      },
+      "mkr2_flow_setpoint_temperature": {
+        "name": "MKR2 flow setpoint"
+      },
+      "outside_temperature": {
+        "name": "Outside temperature"
+      },
+      "outside_temperature_delayed": {
+        "name": "Outside temperature, delayed"
+      },
+      "return_setpoint_temperature": {
+        "name": "Return setpoint"
+      },
+      "return_temperature": {
+        "name": "Return temperature"
+      },
+      "source_inlet_temperature": {
+        "name": "Source inlet temperature"
+      },
+      "source_outlet_temperature": {
+        "name": "Source outlet temperature"
+      },
+      "suction_gas_temperature": {
+        "name": "Suction gas temperature"
+      },
+      "supply_temperature": {
+        "name": "Supply temperature"
+      },
+      "total_electric_energy": {
+        "name": "Total electric energy"
+      },
+      "total_heat_energy": {
+        "name": "Total heat energy"
+      }
+    }
+  },
+  "exceptions": {
+    "modbus_error": {
+      "message": "Modbus error: {error}"
+    },
+    "no_component_answered": {
+      "message": "The heat pump did not answer."
+    }
+  }
+}

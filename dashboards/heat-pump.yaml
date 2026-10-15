@@ -1,0 +1,83 @@
+# Ready-made dashboard for the Heliotherm integration.
+#
+# Before importing, replace every "heliotherm_XXX" with your entity prefix.
+# It is derived from the device name: an RCG at 192.168.0.100 gives the
+# prefix "heliotherm_192_168_0_100". You can also copy a prefix from any
+# entity ID on the integration's device page.
+#
+# To import: Settings > Dashboards > + Add dashboard > "Start from
+# scratch" > open the new dashboard > three-dot menu > Edit in YAML >
+# paste this file's contents > Save.
+
+title: Heat pump
+views:
+  - title: Heat pump
+    icon: mdi:heat-pump
+    type: sections
+    max_columns: 2
+    sections:
+      - type: grid
+        title: Status
+        cards:
+          - type: tile
+            entity: binary_sensor.heliotherm_XXX_compressor
+            name: Compressor
+          - type: tile
+            entity: sensor.heliotherm_XXX_compressor_demand
+            name: Demand
+          - type: tile
+            entity: binary_sensor.heliotherm_XXX_fault
+            name: Fault
+      - type: grid
+        title: Temperatures
+        cards:
+          - type: tile
+            entity: sensor.heliotherm_XXX_outside_temperature
+            name: Outside
+          - type: tile
+            entity: sensor.heliotherm_XXX_supply_temperature
+            name: Supply
+          - type: tile
+            entity: sensor.heliotherm_XXX_return_temperature
+            name: Return
+          - type: tile
+            entity: sensor.heliotherm_XXX_domestic_hot_water_temperature
+            name: Hot water
+      - type: grid
+        title: Power
+        cards:
+          - type: statistics-graph
+            entities:
+              - entity: sensor.heliotherm_XXX_electric_power
+              - entity: sensor.heliotherm_XXX_heat_power
+            period: hour
+            chart_type: line
+      - type: grid
+        title: Energy per day
+        cards:
+          - type: statistics-graph
+            entities:
+              - entity: sensor.heliotherm_XXX_heating_heat_energy
+              - entity: sensor.heliotherm_XXX_heating_electric_energy
+              - entity: sensor.heliotherm_XXX_domestic_hot_water_heat_energy
+              - entity: sensor.heliotherm_XXX_domestic_hot_water_electric_energy
+            period: day
+      - type: grid
+        title: Diagnostics
+        cards:
+          - type: gauge
+            entity: sensor.heliotherm_XXX_coefficient_of_performance
+            name: COP
+            min: 0
+            max: 8
+            needle: true
+            severity:
+              red: 0-2
+              yellow: 2-3
+              green: 3-8
+          - type: tile
+            entity: sensor.heliotherm_XXX_low_pressure
+            name: Low pressure
+          - type: tile
+            entity: sensor.heliotherm_XXX_high_pressure
+            name: High pressure

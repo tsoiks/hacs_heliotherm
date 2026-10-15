@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+      - name: Create environment
+        run: uv venv .venv
+      - name: Install dependencies
+        run: |
+          uv pip install \
+            homeassistant==2026.10.1 \
+            "modbus-connection[tmodbus]==4.12.4" \
+            tmodbus==0.6.2 pymodbus==3.13.1 \
+            pytest-homeassistant-custom-component==0.13.372 \
+            ruff
+      - name: Lint
+        run: .venv/bin/ruff check custom_components tests
+      - name: Test
+        run: .venv/bin/python -m pytest tests/ -q

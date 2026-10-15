@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Never publish: previous integration and Heliotherm's copyright-protected PDFs.
+# Local read-only reference only.
+legacy/
+
+# Internal working documents for agent sessions; kept local.
+AGENTS.md
+OPEN_ITEMS.md
+
+# macOS
+.DS_Store
