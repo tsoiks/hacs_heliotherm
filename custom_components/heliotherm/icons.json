@@ -1,0 +1,35 @@
+{
+  "entity": {
+    "sensor": {
+      "coefficient_of_performance": {
+        "default": "mdi:leaf"
+      },
+      "compressor_demand": {
+        "default": "mdi:heat-pump"
+      },
+      "compressor_speed_setpoint": {
+        "default": "mdi:speedometer"
+      },
+      "domestic_hot_water_hours": {
+        "default": "mdi:counter"
+      },
+      "expansion_valve": {
+        "default": "mdi:valve"
+      },
+      "heating_hours": {
+        "default": "mdi:counter"
+      }
+    },
+    "binary_sensor": {
+      "domestic_hot_water_priority": {
+        "default": "mdi:water-boiler"
+      },
+      "four_way_valve": {
+        "default": "mdi:snowflake"
+      },
+      "passive_cooling_valve": {
+        "default": "mdi:valve"
+      }
+    }
+  }
+}

@@ -95,6 +95,12 @@ Assistant-agnostic: it is built on the `modbus-connection` modelling
 framework and can be exercised with that library's mock backend, which the
 test suite does.
 
+## Attribution
+
+The integration's brand icon uses the heat-pump icon from
+[Material Design Icons](https://pictogrammers.com/docs/library/mdi/) by
+the Pictogrammers (Apache 2.0 license).
+
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).
