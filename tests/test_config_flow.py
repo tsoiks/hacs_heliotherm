@@ -10,6 +10,7 @@ import pytest
 from homeassistant.config_entries import SOURCE_USER
 from homeassistant.const import CONF_HOST, CONF_PORT
 from homeassistant.data_entry_flow import FlowResultType
+from homeassistant.helpers.selector import NumberSelector
 from modbus_connection import ModbusTimeoutError
 from modbus_connection.mock import MockModbusConnection, MockModbusUnit
 
@@ -117,6 +118,41 @@ async def test_invalid_input_shows_error(
         )
     assert result["type"] == FlowResultType.FORM
     assert field in result["errors"], user_input
+
+
+async def test_unit_id_selector_is_a_number_box(
+    hass: Any, enable_custom_integrations: None
+) -> None:
+    """The unit ID renders as a plain number box, not a slider."""
+    result = await hass.config_entries.flow.async_init(
+        DOMAIN, context={"source": SOURCE_USER}
+    )
+    schema = result["data_schema"].schema
+    selector = schema[
+        next(key for key in schema if key.schema == "unit_id")
+    ]
+    assert isinstance(selector, NumberSelector)
+    assert selector.config["mode"] == "box"
+    assert selector.config["min"] == 0
+    assert selector.config["max"] == 255
+
+
+async def test_unit_id_float_is_normalized(
+    hass: Any, enable_custom_integrations: None
+) -> None:
+    """A whole-number float from the number box is stored as an int."""
+    with _patched_temporary_unit(_mock_unit()):
+        result = await hass.config_entries.flow.async_init(
+            DOMAIN,
+            context={"source": SOURCE_USER},
+            data={**USER_INPUT, CONF_UNIT_ID: 1.0},
+        )
+    await hass.async_block_till_done()
+    assert result["type"] == FlowResultType.CREATE_ENTRY
+    entry = result["result"]
+    assert entry.data[CONF_UNIT_ID] == 1
+    assert isinstance(entry.data[CONF_UNIT_ID], int)
+    assert entry.unique_id == f"{HOST}_502_{UNIT_ID}"
 
 
 async def test_duplicate_is_rejected(

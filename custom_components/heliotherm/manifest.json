@@ -10,5 +10,5 @@
   "issue_tracker": "https://github.com/tsoiks/hacs_heliotherm/issues",
   "loggers": ["modbus_connection"],
   "requirements": ["modbus-connection==4.12.4"],
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

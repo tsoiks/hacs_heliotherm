@@ -15,6 +15,11 @@ from homeassistant.config_entries import (
 )
 from homeassistant.const import CONF_HOST, CONF_PORT, CONF_SCAN_INTERVAL
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers.selector import (
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
+)
 from modbus_connection import ModbusError, ModbusTcpParams
 
 from .const import (
@@ -29,7 +34,9 @@ from .heliotherm_modbus import HeliothermHeatPump
 _LOGGER = logging.getLogger(__name__)
 
 _PORT_SCHEMA = vol.All(vol.Coerce(int), vol.Range(min=1, max=65535))
-_UNIT_SCHEMA = vol.All(vol.Coerce(int), vol.Range(min=0, max=255))
+_UNIT_SELECTOR = NumberSelector(
+    NumberSelectorConfig(min=0, max=255, mode=NumberSelectorMode.BOX)
+)
 _SCAN_INTERVAL_SCHEMA = vol.All(
     vol.Coerce(int), vol.Range(min=5, max=3600)
 )
@@ -61,7 +68,12 @@ def _validate(user_input: dict[str, Any]) -> dict[str, str]:
     if not isinstance(port, int) or not 1 <= port <= 65535:
         errors[CONF_PORT] = "invalid_port"
     unit_id = user_input.get(CONF_UNIT_ID)
-    if not isinstance(unit_id, int) or not 0 <= unit_id <= 255:
+    if (
+        isinstance(unit_id, bool)
+        or not isinstance(unit_id, (int, float))
+        or not float(unit_id).is_integer()
+        or not 0 <= unit_id <= 255
+    ):
         errors[CONF_UNIT_ID] = "invalid_unit_id"
     return errors
 
@@ -87,6 +99,13 @@ class HeliothermConfigFlow(ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             errors = _validate(user_input)
             if not errors:
+                # The number selector can hand in a whole number as a
+                # float; keep the entry data an int.
+                user_input = {
+                    **user_input,
+                    CONF_PORT: int(user_input[CONF_PORT]),
+                    CONF_UNIT_ID: int(user_input[CONF_UNIT_ID]),
+                }
                 await self.async_set_unique_id(
                     f"{user_input[CONF_HOST]}_{user_input[CONF_PORT]}"
                     f"_{user_input[CONF_UNIT_ID]}"
@@ -110,7 +129,7 @@ class HeliothermConfigFlow(ConfigFlow, domain=DOMAIN):
                     vol.Optional(CONF_PORT, default=DEFAULT_PORT): _PORT_SCHEMA,
                     vol.Optional(
                         CONF_UNIT_ID, default=DEFAULT_UNIT_ID
-                    ): _UNIT_SCHEMA,
+                    ): _UNIT_SELECTOR,
                 }
             ),
             errors=errors,
