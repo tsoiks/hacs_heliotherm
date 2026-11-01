@@ -46,22 +46,32 @@ views:
       - type: grid
         title: Power
         cards:
-          - type: statistics-graph
+          - type: tile
+            entity: sensor.heliotherm_XXX_electric_power
+            name: Electric now
+          - type: tile
+            entity: sensor.heliotherm_XXX_heat_power
+            name: Thermal now
+          - type: history-graph
+            title: Last 12 hours
+            hours_to_show: 12
             entities:
               - entity: sensor.heliotherm_XXX_electric_power
+                name: Electric
               - entity: sensor.heliotherm_XXX_heat_power
-            period: hour
-            chart_type: line
+                name: Thermal
       - type: grid
         title: Energy per day
         cards:
           - type: statistics-graph
             entities:
-              - entity: sensor.heliotherm_XXX_heating_heat_energy
-              - entity: sensor.heliotherm_XXX_heating_electric_energy
-              - entity: sensor.heliotherm_XXX_domestic_hot_water_heat_energy
-              - entity: sensor.heliotherm_XXX_domestic_hot_water_electric_energy
+              - entity: sensor.heliotherm_XXX_total_heat_energy
+                name: Heat
+              - entity: sensor.heliotherm_XXX_total_electric_energy
+                name: Electric
             period: day
+            stat_type: sum
+            chart_type: bar
       - type: grid
         title: Diagnostics
         cards:

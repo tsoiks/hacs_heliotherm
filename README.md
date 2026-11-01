@@ -64,7 +64,8 @@ mode in a later release.
 
 A small, curated dashboard for the integration lives in
 [`dashboards/heat-pump.yaml`](dashboards/heat-pump.yaml): status, the four
-key temperatures, hourly power and daily energy charts, and a compact
+key temperatures, live power history (last 12 hours), daily energy bars,
+and a compact
 diagnostics section. It uses only built-in cards — no additional
 downloads.
 
