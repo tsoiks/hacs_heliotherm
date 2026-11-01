@@ -106,7 +106,7 @@ async def test_setup_exposes_the_whole_input_register_map(
     from homeassistant.helpers import entity_registry as er
 
     registry = er.async_get(hass)
-    assert len(SENSOR_DESCRIPTIONS) == 33
+    assert len(SENSOR_DESCRIPTIONS) == 35
     assert len(BINARY_SENSOR_DESCRIPTIONS) == 8
 
     def state(key: str) -> str:
@@ -144,6 +144,9 @@ async def test_setup_exposes_the_whole_input_register_map(
     assert state("domestic_hot_water_electric_energy") == "310"
     assert state("total_electric_energy") == "2871"
     assert state("total_heat_energy") == "2822"
+    # Derived sensors keep the original values intact.
+    assert state("electric_power_kilowatts") == "1.5"
+    assert state("cumulative_coefficient_of_performance") == "0.98"
 
     def binary_state(key: str) -> str:
         entity_id = registry.async_get_entity_id(

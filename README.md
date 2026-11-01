@@ -33,11 +33,16 @@ directory of your Home Assistant configuration and restart.
 The integration is read-only and exposes the heat pump's complete input
 register map:
 
-- **Sensors** (33): all temperatures (outside, supply, return, buffer,
+- **Sensors** (35): all temperatures (outside, supply, return, buffer,
   source, refrigerant circuit), pressures (low/high), flow rate, compressor
   speed setpoint, COP, expansion valve, compressor demand, electric and
   thermal power, lifetime energy counters (heating / hot water / total),
-  and operating hour counters
+  and operating hour counters. Two derived sensors are included: electric
+  power in kilowatts (for charts that share an axis with the kW thermal
+  power) and the cumulative COP — lifetime heat energy divided by lifetime
+  electric energy, which approximates a seasonal COP (SCOP is a
+  standardized EN 14825 laboratory metric; this ratio is what the counters
+  allow)
 - **Binary sensors** (8): heating circuit pump, buffer charge pump,
   compressor, fault, four-way valve (defrost), source pump or fan,
   domestic hot water priority, passive cooling valve

@@ -101,6 +101,37 @@ SENSOR_DESCRIPTIONS: tuple[HeliothermSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         value_fn=lambda device: device.energy_counters.electric_power,
     ),
+    # Derived from the registers, so the original values stay preserved.
+    HeliothermSensorEntityDescription(
+        key="electric_power_kilowatts",
+        translation_key="electric_power_kilowatts",
+        component="energy_counters",
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=2,
+        value_fn=lambda d: (
+            d.energy_counters.electric_power / 1000
+            if d.energy_counters.electric_power is not None
+            else None
+        ),
+    ),
+    HeliothermSensorEntityDescription(
+        key="cumulative_coefficient_of_performance",
+        translation_key="cumulative_coefficient_of_performance",
+        component="energy_counters",
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=2,
+        value_fn=lambda d: (
+            round(
+                d.energy_counters.heat_total
+                / d.energy_counters.electric_total,
+                2,
+            )
+            if d.energy_counters.electric_total
+            else None
+        ),
+    ),
     # The remaining temperature registers.
     _temperature(
         "outside_temperature", "temperatures", lambda d: d.temperatures.outside

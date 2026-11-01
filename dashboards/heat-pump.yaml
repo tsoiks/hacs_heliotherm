@@ -53,20 +53,18 @@ views:
             entity: sensor.heliotherm_XXX_heat_power
             name: Thermal now
           - type: history-graph
-            title: Last 12 hours
+            title: Last 12 hours (kW)
             hours_to_show: 12
             entities:
-              - entity: sensor.heliotherm_XXX_electric_power
+              - entity: sensor.heliotherm_XXX_electric_power_kilowatts
                 name: Electric
               - entity: sensor.heliotherm_XXX_heat_power
                 name: Thermal
       - type: grid
-        title: Energy per day
+        title: Electricity per day
         cards:
           - type: statistics-graph
             entities:
-              - entity: sensor.heliotherm_XXX_total_heat_energy
-                name: Heat
               - entity: sensor.heliotherm_XXX_total_electric_energy
                 name: Electric
             period: day
@@ -85,6 +83,16 @@ views:
               red: 0-2
               yellow: 2-3
               green: 3-8
+          - type: gauge
+            entity: sensor.heliotherm_XXX_cumulative_coefficient_of_performance
+            name: COP since start
+            min: 0
+            max: 6
+            needle: true
+            severity:
+              red: 0-2
+              yellow: 2-3
+              green: 3-6
           - type: tile
             entity: sensor.heliotherm_XXX_low_pressure
             name: Low pressure

@@ -98,6 +98,12 @@
       "electric_power": {
         "name": "Electric power"
       },
+      "electric_power_kilowatts": {
+        "name": "Electric power (kW)"
+      },
+      "cumulative_coefficient_of_performance": {
+        "name": "COP, cumulative"
+      },
       "evaporation_temperature": {
         "name": "Evaporation temperature"
       },
