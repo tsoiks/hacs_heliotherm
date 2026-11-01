@@ -90,7 +90,7 @@
         "name": "Domestic hot water heat energy"
       },
       "domestic_hot_water_hours": {
-        "name": "Domestic hot water operating hours"
+        "name": "Domestic hot water hours"
       },
       "domestic_hot_water_temperature": {
         "name": "Domestic hot water temperature"
@@ -99,10 +99,10 @@
         "name": "Electric power"
       },
       "electric_power_kilowatts": {
-        "name": "Electric power (kW)"
+        "name": "Electric power kilowatts"
       },
       "cumulative_coefficient_of_performance": {
-        "name": "COP, cumulative"
+        "name": "Cumulative coefficient of performance"
       },
       "evaporation_temperature": {
         "name": "Evaporation temperature"
@@ -123,7 +123,7 @@
         "name": "Heating heat energy"
       },
       "heating_hours": {
-        "name": "Heating operating hours"
+        "name": "Heating hours"
       },
       "heat_power": {
         "name": "Heat power"
@@ -138,10 +138,10 @@
         "name": "Low pressure"
       },
       "mkr1_flow_setpoint_temperature": {
-        "name": "MKR1 flow setpoint"
+        "name": "MKR1 flow setpoint temperature"
       },
       "mkr2_flow_setpoint_temperature": {
-        "name": "MKR2 flow setpoint"
+        "name": "MKR2 flow setpoint temperature"
       },
       "outside_temperature": {
         "name": "Outside temperature"
@@ -150,7 +150,7 @@
         "name": "Outside temperature, delayed"
       },
       "return_setpoint_temperature": {
-        "name": "Return setpoint"
+        "name": "Return setpoint temperature"
       },
       "return_temperature": {
         "name": "Return temperature"

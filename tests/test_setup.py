@@ -189,6 +189,44 @@ async def test_failed_component_marks_sensors_unavailable(
     assert hass.states.get(supply_id).state == "42.5"
 
 
+async def test_entity_ids_match_description_keys(
+    hass: HomeAssistant,
+    entry: MockConfigEntry,
+    mock_unit: MockModbusUnit,
+    enable_custom_integrations: None,
+) -> None:
+    """Every entity id slugs to device prefix + description key.
+
+    The ready-made dashboard references entities as
+    ``heliotherm_<prefix>_<key>``; that only works while each entity's
+    translated name slugs to its key, so hold every entity to it.
+    """
+    from homeassistant.components.binary_sensor import DOMAIN as BINARY_DOMAIN
+    from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
+    from homeassistant.helpers import entity_registry as er
+
+    from custom_components.heliotherm.binary_sensor import (
+        BINARY_SENSOR_DESCRIPTIONS,
+    )
+    from custom_components.heliotherm.sensor import SENSOR_DESCRIPTIONS
+
+    with _patched_unit(mock_unit):
+        await _setup(hass, entry)
+    registry = er.async_get(hass)
+    prefix = "heliotherm_10_0_0_42"
+    for domain, descriptions in (
+        (SENSOR_DOMAIN, SENSOR_DESCRIPTIONS),
+        (BINARY_DOMAIN, BINARY_SENSOR_DESCRIPTIONS),
+    ):
+        for description in descriptions:
+            entity_id = registry.async_get_entity_id(
+                domain, DOMAIN, f"{entry.unique_id}_{description.key}"
+            )
+            assert entity_id == f"{domain}.{prefix}_{description.key}", (
+                description.key
+            )
+
+
 async def test_unload(
     hass: HomeAssistant,
     entry: MockConfigEntry,
