@@ -68,8 +68,10 @@ views:
               - entity: sensor.heliotherm_XXX_total_electric_energy
                 name: Electric
             period: day
-            stat_type: sum
+            stat_types:
+              - change
             chart_type: bar
+            hide_legend: true
       - type: grid
         title: Diagnostics
         cards:
