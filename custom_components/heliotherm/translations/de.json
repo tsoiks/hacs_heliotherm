@@ -1,0 +1,186 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Das Gerät ist bereits konfiguriert"
+    },
+    "error": {
+      "cannot_connect": "Von der Wärmepumpe konnte nichts gelesen werden. Prüfen Sie die Adresse, den Port, die Modbus Unit-ID und ob Modbus TCP am Remote Control Gateway der Wärmepumpe aktiviert ist.",
+      "invalid_host": "Geben Sie einen Hostnamen oder eine IP-Adresse ein.",
+      "invalid_port": "Geben Sie einen Port zwischen 1 und 65535 ein.",
+      "invalid_unit_id": "Geben Sie eine Modbus Unit-ID zwischen 0 und 255 ein."
+    },
+    "step": {
+      "user": {
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "unit_id": "Modbus Unit-ID"
+        },
+        "data_description": {
+          "host": "Der Hostname oder die IP-Adresse des Remote Control Gateways (RCG) der Wärmepumpe.",
+          "port": "Der Modbus-TCP-Port des RCG.",
+          "unit_id": "Die Modbus Unit-ID der Wärmepumpe, wie in den Modbus-Einstellungen des RCG angezeigt."
+        },
+        "description": "Verbinden Sie eine Heliotherm-Wärmepumpe über Modbus TCP durch deren Remote Control Gateway."
+      },
+      "init": {
+        "data": {
+          "scan_interval": "Sekunden zwischen Abfragen"
+        },
+        "data_description": {
+          "scan_interval": "Wie oft die Wärmepumpe gelesen wird. Die Integration liest pro Abfrage eine Handvoll Register."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "buffer_charge_pump": {
+        "name": "Pufferladepumpe"
+      },
+      "compressor": {
+        "name": "Verdichter"
+      },
+      "domestic_hot_water_priority": {
+        "name": "Warmwasservorrang"
+      },
+      "fault": {
+        "name": "Störung"
+      },
+      "four_way_valve": {
+        "name": "Vierwegeventil"
+      },
+      "heating_circuit_pump": {
+        "name": "Heizkreispumpe"
+      },
+      "passive_cooling_valve": {
+        "name": "Kühl-Umschaltventil (passiv)"
+      },
+      "source_pump_or_fan": {
+        "name": "Energiequellenpumpe/Ventilator"
+      }
+    },
+    "sensor": {
+      "buffer_temperature": {
+        "name": "Puffertemperatur"
+      },
+      "coefficient_of_performance": {
+        "name": "COP"
+      },
+      "compressor_demand": {
+        "name": "Wärmepumpenanforderung",
+        "state": {
+          "none": "Keine",
+          "cooling": "Kühlen",
+          "heating": "Heizen",
+          "domestic_hot_water": "Warmwasser",
+          "external": "Extern"
+        }
+      },
+      "compressor_speed_setpoint": {
+        "name": "Verdichterdrehzahl-Sollwert"
+      },
+      "condensation_temperature": {
+        "name": "Kondensationstemperatur"
+      },
+      "cumulative_coefficient_of_performance": {
+        "name": "Kumulativer COP"
+      },
+      "domestic_hot_water_electric_energy": {
+        "name": "Elektrische Energie Warmwasser"
+      },
+      "domestic_hot_water_heat_energy": {
+        "name": "Thermische Energie Warmwasser"
+      },
+      "domestic_hot_water_hours": {
+        "name": "Betriebsstunden Warmwasser"
+      },
+      "domestic_hot_water_temperature": {
+        "name": "Warmwassertemperatur"
+      },
+      "electric_power": {
+        "name": "Elektrische Aufnahmeleistung"
+      },
+      "electric_power_kilowatts": {
+        "name": "Elektrische Aufnahmeleistung (kW)"
+      },
+      "evaporation_temperature": {
+        "name": "Verdampfungstemperatur"
+      },
+      "expansion_valve": {
+        "name": "Expansionsventil"
+      },
+      "flow_rate": {
+        "name": "Durchfluss"
+      },
+      "fresh_water_temperature": {
+        "name": "Frischwassertemperatur"
+      },
+      "heating_electric_energy": {
+        "name": "Elektrische Energie Heizen"
+      },
+      "heating_heat_energy": {
+        "name": "Thermische Energie Heizen"
+      },
+      "heating_hours": {
+        "name": "Betriebsstunden Heizen"
+      },
+      "heat_power": {
+        "name": "Wärmeleistung"
+      },
+      "high_pressure": {
+        "name": "Hochdruck"
+      },
+      "hot_gas_temperature": {
+        "name": "Heißgastemperatur"
+      },
+      "low_pressure": {
+        "name": "Niederdruck"
+      },
+      "mkr1_flow_setpoint_temperature": {
+        "name": "MKR1 Vorlauf-Solltemperatur"
+      },
+      "mkr2_flow_setpoint_temperature": {
+        "name": "MKR2 Vorlauf-Solltemperatur"
+      },
+      "outside_temperature": {
+        "name": "Außentemperatur"
+      },
+      "outside_temperature_delayed": {
+        "name": "Außentemperatur (verzögert)"
+      },
+      "return_setpoint_temperature": {
+        "name": "Rücklauf-/Speichersolltemperatur"
+      },
+      "return_temperature": {
+        "name": "Rücklauftemperatur"
+      },
+      "source_inlet_temperature": {
+        "name": "EQ-Eintrittstemperatur"
+      },
+      "source_outlet_temperature": {
+        "name": "EQ-Austrittstemperatur"
+      },
+      "suction_gas_temperature": {
+        "name": "Sauggastemperatur"
+      },
+      "supply_temperature": {
+        "name": "Vorlauftemperatur"
+      },
+      "total_electric_energy": {
+        "name": "Gesamte elektrische Energie"
+      },
+      "total_heat_energy": {
+        "name": "Gesamte thermische Energie"
+      }
+    }
+  },
+  "exceptions": {
+    "modbus_error": {
+      "message": "Modbus-Fehler: {error}"
+    },
+    "no_component_answered": {
+      "message": "Die Wärmepumpe hat nicht geantwortet."
+    }
+  }
+}

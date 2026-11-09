@@ -54,6 +54,10 @@ official documents.
 The poll interval can be changed in the integration's options (default:
 30 seconds).
 
+This integration ships English and German translations. Entity display
+names follow your Home Assistant language; note that a German-language
+instance generates German entity IDs for newly created entities.
+
 ## Status and validation
 
 The register map comes from the official Heliotherm Modbus documentation
